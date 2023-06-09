@@ -5,28 +5,38 @@ import java.util.concurrent.TimeoutException;
 
 public class ExceptionExample {
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws FileNotFoundException, TimeoutException {
 
         /** Снизу начало вызовов, следовательно смотрим stacktrace снизу вверх. */
 
         System.out.println("main start.");
         try {
+            System.out.println(finallyTest());
             unsafe(10);
-        } catch (TimeoutException exception) {
-            // handle exception.
+        } catch (RuntimeException exception) {
+            System.out.println("catch");
             exception.printStackTrace();
-        } catch (Exception e) {
-            // handle exception.
-            e.printStackTrace();
+        } finally {
+            System.out.println("finally");
         }
         System.out.println("main end.");
         // code.
     }
 
-    public static void unsafe(int value) throws FileNotFoundException, TimeoutException {
+    public static int finallyTest() {
+        try {
+            return 2;
+        } catch (Throwable throwable) {
+            return 3;
+        } finally {
+            return 4;
+        }
+    }
+
+    public static void unsafe(int value) {
         System.out.println("unsafe start.");
         if (value > 0) {
-            throw new FileNotFoundException();
+            throw new RuntimeException();
         }
         System.out.println("unsafe end.");
         // code.
