@@ -25,7 +25,7 @@ public class MapReduceExample {
                         new Student(101, "Kira")
                 )
                 .sequential()
-                .flatMap(student -> student.getMarks().stream())
+                //.flatMap(student -> student.getMarks().stream())
                 //.map()
                 //.map(Student::getAge)
                 //.filter(student -> student.getAge() < 18)
