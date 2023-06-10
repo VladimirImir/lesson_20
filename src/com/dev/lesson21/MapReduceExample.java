@@ -1,5 +1,6 @@
 package com.dev.lesson21;
 
+import java.util.Optional;
 import java.util.stream.Stream;
 
 /**
@@ -13,7 +14,8 @@ import java.util.stream.Stream;
 public class MapReduceExample {
 
     public static void main(String[] args) {
-        Stream.of(
+        /** Optional - он опционален, может быть , а может и не быть. */
+        Optional<Student> maybeStudent = Stream.of(
                         new Student(18, "Ivan"),
                         new Student(23, "Petr"),
                         new Student(34, "Vasya"),
@@ -23,8 +25,17 @@ public class MapReduceExample {
                         new Student(101, "Kira")
                 )
                 .sequential()
-                .map(Student::getAge)
-                .reduce(Integer::sum)
-                .ifPresent(System.out::println);
+                .flatMap(student -> student.getMarks().stream())
+                //.map()
+                //.map(Student::getAge)
+                //.filter(student -> student.getAge() < 18)
+                .reduce((student1, student2) -> student1.getAge() > student2.getAge() ? student1 : student2);
+
+        //maybeStudent.ifPresent(System.out::println);
+
+        maybeStudent.map(Student::getAge)
+                // .filter(age -> age > 25)
+                .flatMap(age -> null)
+                .get();
     }
 }
