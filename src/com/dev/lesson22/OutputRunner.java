@@ -15,14 +15,13 @@ public class OutputRunner {
             outputStream.write(value.getBytes());
             outputStream.write(System.lineSeparator().getBytes());
         }
-        
         /** FileOutputStream -> append: true - означает что мы должны добавлять новый текст,
          *  а не перезаписывать его. */
-        /*try (FileOutputStream outputStream = new FileOutputStream(file, true);) {
+        /*try (FileOutputStream outputStream = new FileOutputStream(file, true)) {
             String value = "Hello World!";
             outputStream.write(value.getBytes());
             outputStream.write("\n".getBytes());
         }*/
-
+        
     }
 }
